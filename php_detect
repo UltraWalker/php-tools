@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ -f "composer.json" ]; then
+	# it is php: laravel, sf, ...
+        if [ -f "artisan" ]; then
+		echo "Laravel"
+		cat composer.json | grep -i "laravel/framework"
+	else
+		if [ -d "app" ]; then
+			php5.6 app/console --version
+		else
+			php7.1 bin/console --version
+		fi
+	fi
+else
+    if [ -d "www" ]; then
+	echo "cordova"
+    else
+	echo "We dont know but not php or cordova"
+    fi
+fi

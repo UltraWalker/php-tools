@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ -f "composer.json" ]; then
+	# it is php: laravel, sf, ...
+        if [ -f "artisan" ]; then
+		echo "Laravel"
+		php artisan cache:clear
+		php artisan config:clear
+		php artisan view:clear
+	else
+		if [ -d "app" ]; then
+			rm -fr app/cache/*
+		else
+			rm -fr var/cache/*
+		fi
+	fi
+else
+    if [ -d "www" ]; then
+	echo "cordova"
+    else
+	echo "We dont know but not php or cordova"
+    fi
+fi
